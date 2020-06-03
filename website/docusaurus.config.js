@@ -1,11 +1,11 @@
 module.exports = {
   title: 'Raspernetes',
-  tagline: 'running a k8s on Raspberry 🥧',
+  tagline: 'running a k8s on Raspberry',
   url: 'https://raspbernetes.github.io',
   baseUrl: '/',
   favicon: 'img/favicon.ico',
-  organizationName: 'raspbernetes', // Usually your GitHub org/user name.
-  projectName: 'raspbernetes.github.io', // Usually your repo name.
+  organizationName: 'raspbernetes',
+  projectName: 'raspbernetes.github.io',
   themeConfig: {
     navbar: {
       title: 'Raspernetes',
@@ -84,13 +84,13 @@ module.exports = {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           editUrl:
-            'https://github.com/facebook/docusaurus/edit/master/website/',
+            'https://github.com/raspbernetes/docs/edit/master/website/',
         },
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
           editUrl:
-            'https://github.com/facebook/docusaurus/edit/master/website/blog/',
+            'https://github.com/raspbernetes/docs/edit/master/website/blog/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
