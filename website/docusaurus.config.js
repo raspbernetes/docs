@@ -1,11 +1,11 @@
 module.exports = {
   title: 'Raspernetes',
   tagline: 'running a k8s on Raspberry 🥧',
-  url: 'https://raspernetes.io',
-  baseUrl: '/',
+  url: 'https://raspbernetes.github.io',
+  baseUrl: 'https://github.com/raspbernetes/raspbernetes.github.io',
   favicon: 'img/favicon.ico',
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
+  organizationName: 'raspbernetes', // Usually your GitHub org/user name.
+  projectName: 'raspbernetes.github.io', // Usually your repo name.
   themeConfig: {
     navbar: {
       title: 'Raspernetes',
@@ -20,7 +20,7 @@ module.exports = {
           label: 'Docs',
           position: 'left',
         },
-        {to: 'blog', label: 'Blog', position: 'left'},
+        { to: 'blog', label: 'Blog', position: 'left' },
         {
           href: 'https://github.com/raspbernetes',
           label: 'GitHub',
