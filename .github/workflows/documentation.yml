@@ -41,12 +41,12 @@ jobs:
           IdentityFile ~/.ssh/id_rsa
           EOT
       - name: Release to GitHub Pages
+        working-directory: ./website
         env:
           USE_SSH: true
           GIT_USER: git
         run: |
           git config --global user.email '20387402+xUnholy@users.noreply.github.com'
           git config --global user.name 'Michael Fornaro'
-          cd ./website
           npm ci
           npx docusaurus deploy
