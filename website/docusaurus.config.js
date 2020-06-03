@@ -2,7 +2,7 @@ module.exports = {
   title: 'Raspernetes',
   tagline: 'running a k8s on Raspberry 🥧',
   url: 'https://raspbernetes.github.io',
-  baseUrl: 'https://github.com/raspbernetes/raspbernetes.github.io',
+  baseUrl: '/',
   favicon: 'img/favicon.ico',
   organizationName: 'raspbernetes', // Usually your GitHub org/user name.
   projectName: 'raspbernetes.github.io', // Usually your repo name.
