@@ -47,6 +47,6 @@ jobs:
         run: |
           git config --global user.email '20387402+xUnholy@users.noreply.github.com'
           git config --global user.name 'Michael Fornaro'
-          echo $(pwd)
+          cd ./website
           npm ci
           npx docusaurus deploy
