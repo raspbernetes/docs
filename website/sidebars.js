@@ -1,7 +1,8 @@
 module.exports = {
   someSidebar: {
-    "Raspbernetes": ['doc1', 'doc2', 'doc3'],
-    "Getting Started": ['installation'],
+    "Raspbernetes": ['introduction', 'contributing'],
+    "Getting Started": ['installation', 'configuration'],
     "Advanced": ['architecture'],
+    "Security": ['cis-benchmark']
   },
 };
