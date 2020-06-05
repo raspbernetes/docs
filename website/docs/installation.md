@@ -5,8 +5,6 @@ title: Installation
 
 This guide will walk through the steps required to bootstrap a running Kubernetes cluster with a highly available topology.
 
-> Note: If you wish to use Raspbian Lite please use the following [guide](raspbian/README.md).
-
 ## Prerequisites
 
 Prior to getting started you will need to install the following tools:
@@ -17,9 +15,15 @@ Prior to getting started you will need to install the following tools:
 
 ## Setup Operating System
 
+:::note
+If you wish to use the Raspbian Lite OS please use the following [guide](https://github.com/raspbernetes/k8s-cluster-installation/blob/master/raspbian/README.md).
+:::
+
 ## Configure Cloud Init
 
 ## Flash SD Cards
+
+## Configure Nodes
 
 Once the Raspberry Pi's are running and all the prerequisites have been completed we're now ready to setup the Ansible inventory.
 
