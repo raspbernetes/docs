@@ -3,33 +3,23 @@ id: installation
 title: Installation
 ---
 
-This guide will walk through the steps required to bootstrap a running Kubernetes cluster with a highly available topology. You will learn and configure the CRI and CNI of your choice (assuming it is supported) and understand how to setup load balancing between your multi master cluster.
+This guide will walk through the steps required to bootstrap a running Kubernetes cluster with a highly available topology.
 
 > Note: If you wish to use Raspbian Lite please use the following [guide](raspbian/README.md).
 
-## Repository Structure
-
-The repository used to install kubernetes can be found here: https://github.com/raspbernetes/k8s-cluster-installation
-
-```bash
-.
-├── .github     # Github workflows and CODEOWNERS files
-├── ansible     # Ansible playbook to run after the RPis have been flashed
-├── cloudflare  # k8s resources for cloudflare auth healthcheck configuration
-├── docs        # Documentation
-├── rasbian     # k8s bootstrap scripts (deprecated)
-└── setup       # Cloud init scripts used to flash RPis
-```
-
 ## Prerequisites
 
-Prior to getting started you will need to have several things done first. Assuming you already have the [hardware](#Hardware) available, you will need to do the following:
+Prior to getting started you will need to install the following tools:
 
-1. Flash OS onto SD card. Guide [Here](setup/README.md)
-2. Install Ansible. Download [Here](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
-3. SSH connectivity to each node. (Step 1 requires you setup SSH keys)
+- [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
+- [Flash](https://github.com/hypriot/flash#installation)
+- [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 
-## Lets Begin
+## Setup Operating System
+
+## Configure Cloud Init
+
+## Flash SD Cards
 
 Once the Raspberry Pi's are running and all the prerequisites have been completed we're now ready to setup the Ansible inventory.
 
@@ -106,12 +96,3 @@ k8s-worker-01   Ready      <none>   16s     v1.17.4
 
 > If you weren't lucky enough to have everything successful on the first attempt please open an [issue](https://github.com/raspbernetes/k8s-cluster-installation/issues/new) with as much context and we'll try to solve and improve for future people.
 
-## Network topology
-
-|IP|Function|
-| :---: | :---: |
-|192.168.1.1|Router|
-|192.168.1.121|master (k8s-master-01)|
-|192.168.1.122|master (k8s-master-02)|
-|192.168.1.123|master (k8s-master-03)|
-|192.168.1.131|worker (k8s-worker-01)|
