@@ -3,20 +3,25 @@ id: cis-benchmark
 title: CIS Benchmark
 ---
 
-| ID | Description | URL |
+| ID | Description | Code |
 |:--:| ----------- |:---:|
-| 01 | Enforcing CPU limits prevents DOS via resource exhaustion |[Link](https://kubesec.io/basics/containers-resources-limits-cpu/)|
-|  02 | Enforcing memory limits prevents DOS via resource exhaustion | [Link](https://kubesec.io/basics/containers-resources-limits-memory) |
-| 03 | CAP_SYS_ADMIN is the most privileged capability and should always be avoided | [Link](https://kubesec.io/basics/containers-securitycontext-capabilities-add-index-sys-admin/) |
-| 04 | Drop all capabilities and add only those required to reduce syscall attack surface | [Link](https://kubesec.io/basics/containers-securitycontext-capabilities-drop-index-all/) |
-| 05 | Privileged containers can allow almost completely unrestricted host access | [Link](https://kubesec.io/basics/containers-securitycontext-privileged-true/) |
-| 06 | An immutable root filesystem can prevent malicious binaries being added to PATH and increase attack cost | [Link](https://kubesec.io/basics/containers-securitycontext-readonlyrootfilesystem-true/) |
-| 07 | Force the running image to run as a non-root user to ensure least privilege | [Link](https://kubesec.io/basics/containers-securitycontext-runasnonroot-true/) |
-| 08 | Run as a high-UID user to avoid conflicts with the host’s user table | [Link](https://kubesec.io/basics/containers-securitycontext-runasuser/) |
-| 09 | Managing /etc/hosts aliases can prevent Docker from modifying the file after a pod’s containers have already been started | [Link](https://kubesec.io/basics/spec-hostaliases/) |
-| 10 | Sharing the host’s IPC namespace allows container processes to communicate with processes on the host | [Link](https://kubesec.io/basics/spec-hostipc/) |
-| 11 | Sharing the host’s network namespace permits processes in the pod to communicate with processes bound to the host’s loopback adapter | [Link](https://kubesec.io/basics/spec-hostnetwork/) |
-| 12 | Sharing the host’s PID namespace allows visibility of processes on the host, potentially leaking information such as environment variables and configuration | [Link](https://kubesec.io/basics/spec-hostpid/) |
-| 13 | Mounting the docker.socket leaks information about other containers and can allow container breakout | [Link](https://kubesec.io/basics/spec-volumes-hostpath-path-var-run-docker-sock/) |
-| 14 | Avoid using the :latest tag when deploying containers in production as it is harder to track which version of the image is running and more difficult to roll back properly. | [Link](https://kubernetes.io/docs/concepts/configuration/overview/#container-images) |
-| 15 | Disabling allowPrivilegeEscalation to false ensures that no child process of a container can gain more privileges than its parent. | [Link](https://kubernetes.io/docs/concepts/policy/pod-security-policy/#privilege-escalation) |
+| CIS.1.2.1  | Ensure that the --anonymous-auth argument is set to false | [Link](https://github.com/raspbernetes/k8s-gitops/blob/master/policies/CIS.1.2.1.rego) |
+| CIS.1.2.10 | Ensure that the admission control plugin EventRateLimit is set | [Link](https://github.com/raspbernetes/k8s-gitops/blob/master/policies/CIS.1.2.10.rego) |
+| CIS.1.2.11 | Ensure that the admission control plugin AlwaysAdmit is not set | [Link](https://github.com/raspbernetes/k8s-gitops/blob/master/policies/CIS.1.2.11.rego) |
+| CIS.1.2.12 | Ensure that the admission control plugin AlwaysPullImages is set| [Link](https://github.com/raspbernetes/k8s-gitops/blob/master/policies/CIS.1.2.12.rego) |
+| CIS.1.2.13 | Ensure that the admission control plugin SecurityContextDeny is set if PodSecurityPolicy is not used | [Link](https://github.com/raspbernetes/k8s-gitops/blob/master/policies/CIS.1.2.13.rego) |
+| CIS.1.2.14 | Ensure that the admission control plugin ServiceAccount is set| [Link](https://github.com/raspbernetes/k8s-gitops/blob/master/policies/CIS.1.2.14.rego) |
+| CIS.1.2.15 | Ensure that the admission control plugin NamespaceLifecycle is set | [Link](https://github.com/raspbernetes/k8s-gitops/blob/master/policies/CIS.1.2.15.rego) |
+| CIS.1.2.16 | Ensure that the admission control plugin PodSecurityPolicy is set| [Link](https://github.com/raspbernetes/k8s-gitops/blob/master/policies/CIS.1.2.16.rego) |
+| CIS.1.2.17 | Ensure that the admission control plugin NodeRestriction is set| [Link](https://github.com/raspbernetes/k8s-gitops/blob/master/policies/CIS.1.2.17.rego) |
+| CIS.1.4.1 | Ensure that the --profiling argument is set to false | [Link](https://github.com/raspbernetes/k8s-gitops/blob/master/policies/CIS.1.4.1.rego) |
+| CIS.2.1 | Ensure that the --cert-file and --key-file arguments are set as appropriate | [Link](https://github.com/raspbernetes/k8s-gitops/blob/master/policies/CIS.2.1.rego) |
+| CIS.2.2 | Ensure that the --client-cert-auth argument is set to true | [Link](https://github.com/raspbernetes/k8s-gitops/blob/master/policies/CIS.2.2.rego) |
+| CIS.2.3 | Ensure that the --auto-tls argument is not set to true | [Link](https://github.com/raspbernetes/k8s-gitops/blob/master/policies/CIS.2.3.rego) |
+| CIS.2.4 | Ensure that the --peer-cert-file and --peer-key-file arguments are set as appropriate | [Link](https://github.com/raspbernetes/k8s-gitops/blob/master/policies/CIS.2.4.rego) |
+| CIS.2.5 | Ensure that the --peer-client-cert-auth argument is set to true | [Link](https://github.com/raspbernetes/k8s-gitops/blob/master/policies/CIS.2.5.rego) |
+| CIS.2.6 | Ensure that the --peer-auto-tls argument is not set to true | [Link](https://github.com/raspbernetes/k8s-gitops/blob/master/policies/CIS.2.6.rego) |
+| CIS.2.7 | Ensure that a unique Certificate Authority is used for etcd | [Link](https://github.com/raspbernetes/k8s-gitops/blob/master/policies/CIS.2.7.rego) |
+| CIS.5.1.1 | Ensure that the cluster-admin role is only used where required | [Link](https://github.com/raspbernetes/k8s-gitops/blob/master/policies/CIS.5.1.1.rego) |
+| CIS.5.1.3 | Minimize wildcard use in Roles and ClusterRoles  | [Link](https://github.com/raspbernetes/k8s-gitops/blob/master/policies/CIS.5.1.3.rego) |
+| CIS.5.5.1 | Configure Image Provenance using ImagePolicyWebhook admission controller | [Link](https://github.com/raspbernetes/k8s-gitops/blob/master/policies/CIS.5.5.1.rego) |
