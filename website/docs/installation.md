@@ -15,8 +15,9 @@ Prior to getting started you will need to install the following tools on your ma
 
 ## Setup Operating System
 
-> Note:
-> If you wish to use the Raspbian Lite OS please use the following [guide](https://github.com/raspbernetes/k8s-cluster-installation/blob/master/raspbian/README.md).
+:::note
+If you wish to use the Raspbian Lite OS please use the following [guide](https://github.com/raspbernetes/k8s-cluster-installation/blob/master/raspbian/README.md).
+:::
 
 ## Configure Cloud Init
 
