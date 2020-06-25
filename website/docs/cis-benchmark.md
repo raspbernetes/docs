@@ -4,7 +4,7 @@ title: CIS Benchmark
 ---
 
 | ID | Description | Code |
-|:--:| ----------- |:---:|
+|:--:| ----------- |:----:|
 | CIS.1.2.1  | Ensure that the --anonymous-auth argument is set to false | [Link](https://github.com/raspbernetes/k8s-security-policies/blob/master/policies/CIS.1.2.1/CIS.1.2.1.rego) |
 | CIS.1.2.10 | Ensure that the admission control plugin EventRateLimit is set | [Link](https://github.com/raspbernetes/k8s-security-policies/blob/master/policies/CIS.1.2.10/CIS.1.2.10.rego) |
 | CIS.1.2.11 | Ensure that the admission control plugin AlwaysAdmit is not set | [Link](https://github.com/raspbernetes/k8s-security-policies/blob/master/policies/CIS.1.2.11/CIS.1.2.11.rego) |
