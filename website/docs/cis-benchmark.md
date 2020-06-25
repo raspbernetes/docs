@@ -3,7 +3,6 @@ id: cis-benchmark
 title: CIS Benchmark
 ---
 
-
 | ID | Description | Code |
 |:--:| ----------- |:---:|
 | CIS.1.2.1  | Ensure that the --anonymous-auth argument is set to false | [Link](https://github.com/raspbernetes/k8s-security-policies/blob/master/policies/CIS.1.2.1/CIS.1.2.1.rego) |
