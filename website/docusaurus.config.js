@@ -1,6 +1,6 @@
 module.exports = {
-  title: 'Raspernetes',
-  tagline: 'running a k8s on Raspberry',
+  title: 'Raspbernetes',
+  tagline: 'Running k8s on Raspberry Pi Cluster',
   url: 'https://raspbernetes.github.io',
   baseUrl: '/',
   favicon: 'img/favicon.ico',
@@ -8,9 +8,9 @@ module.exports = {
   projectName: 'raspbernetes.github.io',
   themeConfig: {
     navbar: {
-      title: 'Raspernetes',
+      title: 'Raspbernetes',
       logo: {
-        alt: 'Raspernetes Logo',
+        alt: 'Raspbernetes Logo',
         src: 'img/logo.svg',
       },
       links: [
@@ -45,15 +45,15 @@ module.exports = {
           items: [
             {
               label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/raspernetes',
+              href: 'https://stackoverflow.com/questions/tagged/Raspbernetes',
             },
             {
               label: 'Discord',
-              href: 'https://discordapp.com/invite/raspernetes',
+              href: 'https://discordapp.com/invite/Raspbernetes',
             },
             {
               label: 'Twitter',
-              href: 'https://twitter.com/raspernetes',
+              href: 'https://twitter.com/Raspbernetes',
             },
           ],
         },
@@ -71,7 +71,7 @@ module.exports = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Raspernetes, Inc. Built with ❤️`,
+      copyright: `Copyright © ${new Date().getFullYear()} Raspbernetes, Inc. Built with ❤️`,
     },
   },
   presets: [
