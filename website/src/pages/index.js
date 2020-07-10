@@ -8,32 +8,29 @@ import styles from './styles.module.css';
 
 const features = [
   {
-    title: <>Easy to Use</>,
-    imageUrl: 'img/undraw_docusaurus_mountain.svg',
+    title: <>Gather your tools</>,
+    imageUrl: 'img/3pisetup.jpg',
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        Leverage the power of ARM processing to get your own kubernetes cluster up and running quickly.
       </>
     ),
   },
   {
-    title: <>Focus on What Matters</>,
-    imageUrl: 'img/undraw_docusaurus_tree.svg',
+    title: <>Play with K8S</>,
+    imageUrl: 'img/code.png',
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        Assemble your pi nodes with Ansible. Use these repos to get up and running fast. Faster deployments and better learning opportunities
       </>
     ),
   },
   {
-    title: <>Powered by React</>,
-    imageUrl: 'img/undraw_docusaurus_react.svg',
+    title: <>Opensource at heart</>,
+    imageUrl: 'img/apilab.jpg',
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        Choose from the curated list of unofficial docker images that will be compatible with non supported architectures.. like ARM
       </>
     ),
   },
