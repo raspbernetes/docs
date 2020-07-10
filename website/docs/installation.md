@@ -13,6 +13,9 @@ Prior to getting started you will need to install the following tools on your ma
 - [Flash](https://github.com/hypriot/flash#installation)
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 
+Clone the [k8s-cluster-installation](https://github.com/raspbernetes/k8s-cluster-installation.git) repository. 
+You will need to run these steps from that location.
+
 ## Setup Operating System
 
 :::note
@@ -121,7 +124,7 @@ There are a variety of different configurable options in the Ansible automation.
 Assuming all previous steps and configuration are correct the last thing to do is to execute the playbook. The playbook that should be used is the `k8s-all.yml` playbook, this will handle all the master and worker node logic and sequencing.
 
 ```bash
-env ANSIBLE_CONFIG=ansible.cfg ansible-playbook \
+env ANSIBLE_CONFIG=ansible/ansible.cfg ansible-playbook \
     -i ansible/inventory \
     ansible/playbooks/k8s-all.yml
 ```
