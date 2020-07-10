@@ -9,7 +9,6 @@ import styles from './styles.module.css';
 const features = [
   {
     title: <>Gather your tools</>,
-    imageUrl: 'img/3pisetup.jpg',
     description: (
       <>
         Leverage the power of ARM processing to get your own kubernetes cluster up and running quickly.
@@ -18,7 +17,6 @@ const features = [
   },
   {
     title: <>Play with K8S</>,
-    imageUrl: 'img/code.png',
     description: (
       <>
         Assemble your pi nodes with Ansible. Use these repos to get up and running fast. Faster deployments and better learning opportunities
@@ -27,7 +25,6 @@ const features = [
   },
   {
     title: <>Opensource at heart</>,
-    imageUrl: 'img/apilab.jpg',
     description: (
       <>
         Choose from the curated list of unofficial docker images that will be compatible with non supported architectures.. like ARM
