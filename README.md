@@ -16,6 +16,6 @@ Run locally by changing into the `website` folder and running:
 
 ```yarn```
 
-with depdenencies installed, start the app with:
+with dependencies installed, start the app with:
 
 ```yarn start```
