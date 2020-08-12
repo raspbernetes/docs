@@ -3,8 +3,6 @@ id: contributing
 title: Contributing
 ---
 
-# How to contribute
-
 Raspbernetes repositories are [Apache 2.0](LICENSE) licensed and accepts contributions via GitHub pull requests. Before contributing, make sure to have read the [Code of Conduct](https://github.com/raspbernetes/k8s-cluster-installation/blob/master/CODE_OF_CONDUCT.md).
 
 We welcome contributions to all [Raspbernetes](https://github.com/raspbernetes) projects.
