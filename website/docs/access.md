@@ -3,7 +3,7 @@ id: remote_kubectl_access
 title: Remote Kubectl Access
 ---
 
-![Remote Kubectl Access](../static/img/docs/kubectl.png 'Remote Kubectl Access')
+![Remote Kubectl Access](https://github.com/raspbernetes/raspbernetes.github.io/raw/master/img/kubectl.png 'Remote Kubectl Access')
 
 ## Connect from a client machine
 
