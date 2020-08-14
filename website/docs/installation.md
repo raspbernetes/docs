@@ -76,8 +76,8 @@ sudo chmod +x /usr/local/bin/flash
 Follow the following command to download `ubuntu-20.04` image and extract it.
 
 ```bash
-curl -L "http://cdimage.ubuntu.com/releases/focal/release/ubuntu-20.04-preinstalled-server-arm64+raspi.img.xz" -o ~/Downloads/ubuntu-20.04-preinstalled-server-arm64+raspi.img.xz
-unxz -T 0 ~/Downloads/ubuntu-20.04-preinstalled-server-arm64+raspi.img.xz
+curl -L "http://cdimage.ubuntu.com/releases/focal/release/ubuntu-20.04.1-preinstalled-server-arm64+raspi.img.xz" -o ~/Downloads/ubuntu-20.04.1-preinstalled-server-arm64+raspi.img.xz
+unxz -T 0 ~/Downloads/ubuntu-20.04.1-preinstalled-server-arm64+raspi.img.xz
 ```
 
 #### Flash
@@ -85,7 +85,7 @@ unxz -T 0 ~/Downloads/ubuntu-20.04-preinstalled-server-arm64+raspi.img.xz
 ```bash
 flash \
     --userdata setup/cloud-config.yml \
-    ~/Downloads/ubuntu-20.04-preinstalled-server-arm64+raspi.img
+    ~/Downloads/ubuntu-20.04.1-preinstalled-server-arm64+raspi.img
 ```
 
 #### Boot
