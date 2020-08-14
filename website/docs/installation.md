@@ -84,7 +84,7 @@ unxz -T 0 ~/Downloads/ubuntu-20.04-preinstalled-server-arm64+raspi.img.xz
 
 ```bash
 flash \
-    --userdata setup/cloud-config.yml \
+    --config setup/cloud-config.yml \
     ~/Downloads/ubuntu-20.04-preinstalled-server-arm64+raspi.img
 ```
 
