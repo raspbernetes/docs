@@ -121,12 +121,12 @@ k8s-worker-01 | SUCCESS => {
 
 There are a variety of different configurable options in the Ansible automation. These options can be located in the [vars.yml](https://github.com/raspbernetes/k8s-cluster-installation/blob/master/ansible/vars.yml) file, please read [Advanced installation](advanced_installation.md) for more information.
 
-Assuming all previous steps and configuration are correct the last thing to do is to execute the playbook. The playbook that should be used is the `k8s-all.yml` playbook, this will handle all the master and worker node logic and sequencing.
+Assuming all previous steps and configuration are correct the last thing to do is to execute the playbook. The playbook that should be used is the `all.yml` playbook, this will handle all the master and worker node logic and sequencing.
 
 ```bash
 env ANSIBLE_CONFIG=ansible/ansible.cfg ansible-playbook \
     -i ansible/inventory \
-    ansible/playbooks/k8s-all.yml
+    ansible/playbooks/all.yml
 ```
 
 If there was no errors you should be able to execute the following command to check the status of the nodes in the cluster:
