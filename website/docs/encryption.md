@@ -1,6 +1,6 @@
 ---
-id: encrpyt_secrets
-title: Encrpyt Secrets
+id: encrypt_secrets
+title: Encrypt Secrets
 ---
 
 ![Sealed Secrets](https://github.com/raspbernetes/raspbernetes.github.io/raw/master/img/flux-secrets.png 'Sealed Secrets')
