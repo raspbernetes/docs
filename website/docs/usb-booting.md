@@ -146,7 +146,7 @@ cp ~/vmlinux /media/pi/system-boot/
 Next create a script that will automatically decompress the kernel so that we can reboot the Pi without having to do the previous steps manually every boot:
 
 ```bash
-cat <<EOF >/media/pi/system-boot/auto_decompress_kernel
+cat <<'EOF' >/media/pi/system-boot/auto_decompress_kernel
 #!/bin/bash -e
 
 #Set Variables
@@ -195,12 +195,6 @@ fi
 #Exit
 exit 0
 EOF
-```
-
-Make the script executeable:
-
-```bash
-sudo chmod +x /media/pi/system-boot/auto_decompress_kernel
 ```
 
 Create an `apt` hook that decompresses the kernel on updates:
