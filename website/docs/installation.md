@@ -7,144 +7,129 @@ This guide will walk through the steps required to bootstrap a running Kubernete
 
 ## Prerequisites
 
-Prior to getting started you will need to install the following tools on your machine:
+**Hardware** — It’s recommended to have at least 4 raspberry pis as a minimum. Through this guide 3 will be used as master nodes, and 1 will be used as a worker node, however, having more is completely fine.
 
-- [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
-- [Flash](https://github.com/hypriot/flash#installation)
-- [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
+**Software** — You will need the following CLI tools to be able to follow the steps in this guide:
 
-Clone the [k8s-cluster-installation](https://github.com/raspbernetes/k8s-cluster-installation.git) repository. 
-You will need to run these steps from that location.
+- Ansible
+- Flash
+- kubectl
 
-## Setup Operating System
-
-:::note
-If you wish to use the Raspbian Lite OS please use the following [guide](https://github.com/raspbernetes/k8s-cluster-installation/blob/master/raspbian/README.md).
-:::
-
-## Configure Cloud Init
-
-Open [cloud-config](https://github.com/raspbernetes/k8s-cluster-installation/blob/master/setup/cloud-config.yml), you need to change a few fields that will be used to flash for for your Raspberry Pi in this file.
-
-```bash
-hostname: k8s-master-01
-```
-
-This will be the hostname for your nodes, make sure you change names for your different nodes and note them down.
-
-```bash
-users:
-    ssh_authorized_keys:
-      - ''
-```
-
-Put the ssh key of your local machine that you want to access the nodes, so you can ssh to them.
-
-```bash
-write_files:
-  - path: /etc/netplan/50-cloud-init.yaml
-    permissions: '0644'
-    content: |
-      network:
-        version: 2
-        ethernets:
-          eth0:
-            addresses:
-              - 192.168.1.121/24  # change to your RPi's ip address
-            gateway4: 192.168.1.1 # change to your gateway address
-            nameservers:
-              addresses:
-                - 1.1.1.1
-                - 8.8.8.8
-```
-
-You also need to change the addresses to your RPi's ip address and gateway4 to your gateway's address.
+Finally, you will need to clone this repository: https://github.com/raspbernetes/k8s-cluster-installation
 
 ## Flash SD Cards
 
-#### Downloads the Flash tool
+To configure each node with a unique IP and hostname we use cloud-init. This is a method for cross-platform cloud instance initialization which also works for bare-metal installations.
 
-If you haven't install `flash`, you can run below command:
-
-```bash
-sudo curl -L "https://github.com/hypriot/flash/releases/download/2.5.0/flash" -o /usr/local/bin/flash
-sudo chmod +x /usr/local/bin/flash
-```
-
-#### Download and extract the image
-
-Follow the following command to download `ubuntu-20.04` image and extract it.
+The operating system used in this guide will be Ubuntu 20.04, run the following command to download the image:
 
 ```bash
+# Download the Ubuntu 20.04 Focal image for Raspberry Pis
 curl -L "http://cdimage.ubuntu.com/releases/focal/release/ubuntu-20.04.1-preinstalled-server-arm64+raspi.img.xz" -o ~/Downloads/ubuntu-20.04.1-preinstalled-server-arm64+raspi.img.xz
+# Extract the downloaded files
 unxz -T 0 ~/Downloads/ubuntu-20.04.1-preinstalled-server-arm64+raspi.img.xz
 ```
 
-#### Flash
+The following steps will configure networking for the nodes automatically using cloud-init on boot( steps 4 to 6 must be repeated for each node):
+
+1. Open the cloud-config file.
+
+2. Update the gateway4 value to match the IP of your router. (If unsure you can find this IP using this guide)
+
+3. Update the ssh_authorized_keys value with your own keys, enabling secure SSH access to each node without further configuration. (Highly recommended and there are a lot of guides that will explain how to setup SSH keys if you haven’t already)
+
+4. Update the hostname value to be unique per node.
+
+5. Update the addresses value to be a unique IP per node.
+
+6. Flash the OS image and cloud-init configuration onto the Raspberry Pi using the following command:
 
 ```bash
 flash \
-    --userdata setup/cloud-config.yml \
-    ~/Downloads/ubuntu-20.04.1-preinstalled-server-arm64+raspi.img
+  --userdata setup/cloud-config.yml \
+  ~/Downloads/ubuntu-20.04.1-preinstalled-server-arm64+raspi.img
 ```
 
-#### Boot
+## Cluster Configuration
 
-Place the SD Card in your RPi and give the system approx ~10 minutes to boot before trying to SSH.
+### Basic Setup
 
-## Configure Nodes
+*Note: This will initialize your cluster with default CRI & CNI configuration, for more advanced configuration, check the “Advanced Setup” options.*
 
-Once the Raspberry Pi's are running and all the prerequisites have been completed we're now ready to setup the Ansible inventory.
+Now we have all our Raspberry Pi nodes running and are configured with a unique hostname, IP, we now need to declare these values in the Ansible inventory file.
 
-Open the [inventory file](https://github.com/raspbernetes/k8s-cluster-installation/blob/master/ansible/inventory) - each machine that will be joining the Kubernetes cluster must be defined as either a master or worker node. To leverage the highly available topology configuration you would ideally have 3 masters available as a minimum, otherwise 1 master node is fine, however, it won't be highly available.
-
-> Note: Ensure the `hostname` matches what the machine was given when flashed the SD card and `ansible_host` matches the IP allocated to the host on your preferred subnet.
-
-When the inventory has been configured with all the hosts that will be joining the Kubernetes cluster we can run the following command to verify SSH connectivity can be established.
+See below for an example of how I configured my 3 master nodes and 1 worker node.
 
 ```bash
-ansible all -m ping -i ansible/inventory -u pi
+[masters]
+k8s-master-01 hostname=k8s-master-01 ansible_host=192.168.1.121 ansible_user=pi
+k8s-master-02 hostname=k8s-master-02 ansible_host=192.168.1.122 ansible_user=pi
+k8s-master-03 hostname=k8s-master-03 ansible_host=192.168.1.123 ansible_user=pi
+[workers]
+k8s-worker-01 hostname=k8s-worker-01 ansible_host=192.168.1.131 ansible_user=pi
+```
+
+When the inventory has been configured with all hosts, there is one last thing we must configure. We need to assign a VIP (“Virtual IP”) that will be used to load-balance across the HA master nodes.
+
+Open masters.yml and configure the keepalived_vip value to an unassigned IP. For my configuration I use 192.168.1.200 .
+Run the following command to verify SSH connectivity.
+
+```bash
+env ANSIBLE_CONFIG=ansible/ansible.cfg ansible all -m ping
 ```
 
 A successful response should look something like the following:
 
-```diff
-k8s-worker-01 | SUCCESS => {
+```bash
+k8s-master-01 | SUCCESS => {
   ...
-  "changed": false,
   "ping": "pong"
   ...
 }
 ```
 
-> Note: If your output returns success for each ping then you can continue, otherwise there may be some misconfiguration of either the inventory file, or network connectivity issues.
+Note: If your output returns success for each ping then you can continue, otherwise there may be some misconfiguration of either the inventory file or network connectivity issues.
 
-There are a variety of different configurable options in the Ansible automation. These options can be located in the [vars.yml](https://github.com/raspbernetes/k8s-cluster-installation/blob/master/ansible/vars.yml) file, please read [Advanced installation](advanced_installation.md) for more information.
-
-Assuming all previous steps and configuration are correct the last thing to do is to execute the playbook. The playbook that should be used is the `all.yml` playbook, this will handle all the master and worker node logic and sequencing.
+Now we’ve tested network connectivity we can run the automation scripts that will take care of deploying Kubernetes using the following:
 
 ```bash
-env ANSIBLE_CONFIG=ansible/ansible.cfg ansible-playbook \
-    -i ansible/inventory \
-    ansible/playbooks/all.yml
+env ANSIBLE_CONFIG=ansible/ansible.cfg ansible-playbook ansible/playbooks/all.yml
 ```
 
-If there was no errors you should be able to execute the following command to check the status of the nodes in the cluster:
+Once successfully completed you can use kubectl to interact with your Kubernetes cluster:
 
 ```bash
-k get nodes --kubeconfig ansible/playbooks/output/k8s-config.yaml
+kubectl get nodes --kubeconfig ansible/playbooks/output/k8s-config.yaml
 ```
 
-Output:
+The expected output should look something like the following:
 
 ```bash
 NAME            STATUS     ROLES    AGE     VERSION
-k8s-master-01   Ready      master   4m45s   v1.17.4
-k8s-master-02   Ready      master   70s     v1.17.4
-k8s-master-03   Ready      master   79s     v1.17.4
-k8s-worker-01   Ready      <none>   16s     v1.17.4
+k8s-master-01   Ready      master   1m0s     v1.19.5
+k8s-master-02   Ready      master   1m0s     v1.19.5
+k8s-master-03   Ready      master   1m0s     v1.19.5
+k8s-worker-01   Ready      <none>   1m0s     v1.19.5
 ```
 
-**Congratulations!** you have successfully started your own Kubernetes cluster!
+**Congratulations!** You now have a running Kubernetes cluster running on Raspberry Pis.
 
-> If you weren't lucky enough to have everything successful on the first attempt please open an [issue](https://github.com/raspbernetes/k8s-cluster-installation/issues/new) with as much context and we'll try to solve and improve for future people.
+### Advanced Setup
+
+This section is an appendage to the “Basic Setup” however, will explore more of the advanced configuration that is available.
+
+The configuration options can be found in the group_vars folder where you have the files all.yml, masters.yml, and workers.yml. These files contain the configurable variables of each role.
+
+## Cleanup
+
+Tear down the cluster and remove everything using the following command:
+
+```bash
+env ANSIBLE_CONFIG=ansible/ansible.cfg ansible-playbook ansible/playbooks/nuke.yml
+```
+
+## Summary
+
+You’ve successfully created a Kubernetes cluster with a highly available topology on Raspberry Pis.
+
+You now have learned how to configure networking, flash your operating system, set up some basic cluster configuration, and now have the Kubernetes cluster to continue your learning and self-improvement.
