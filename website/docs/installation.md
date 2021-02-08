@@ -25,9 +25,9 @@ The operating system used in this guide will be Ubuntu 20.04, run the following 
 
 ```bash
 # Download the Ubuntu 20.04 Focal image for Raspberry Pis
-curl -L "http://cdimage.ubuntu.com/releases/focal/release/ubuntu-20.04.1-preinstalled-server-arm64+raspi.img.xz" -o ~/Downloads/ubuntu-20.04.1-preinstalled-server-arm64+raspi.img.xz
+curl -L "http://cdimage.ubuntu.com/releases/focal/release/ubuntu-20.04.2-preinstalled-server-arm64+raspi.img.xz" -o ~/Downloads/ubuntu-20.04.2-preinstalled-server-arm64+raspi.img.xz
 # Extract the downloaded files
-unxz -T 0 ~/Downloads/ubuntu-20.04.1-preinstalled-server-arm64+raspi.img.xz
+unxz -T 0 ~/Downloads/ubuntu-20.04.2-preinstalled-server-arm64+raspi.img.xz
 ```
 
 The following steps will configure networking for the nodes automatically using cloud-init on boot( steps 4 to 6 must be repeated for each node):
@@ -47,7 +47,7 @@ The following steps will configure networking for the nodes automatically using 
 ```bash
 flash \
   --userdata setup/cloud-config.yml \
-  ~/Downloads/ubuntu-20.04.1-preinstalled-server-arm64+raspi.img
+  ~/Downloads/ubuntu-20.04.2-preinstalled-server-arm64+raspi.img
 ```
 
 ## Cluster Configuration
