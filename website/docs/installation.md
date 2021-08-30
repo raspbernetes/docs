@@ -39,7 +39,7 @@ sudo chmod +x /usr/local/bin/flash
 
 kubectl can be installed via kubernetes own [instructions](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/).
 
-### Finally, clone [Raspernetes](https://github.com/raspbernetes/k8s-cluster-installation)
+### Finally, clone [Raspbernetes](https://github.com/raspbernetes/k8s-cluster-installation)
 
 Clone the repo into your local machine and then follow the instructions to flash your control planes and nodes.
 
