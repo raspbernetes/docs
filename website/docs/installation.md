@@ -7,15 +7,41 @@ This guide will walk through the steps required to bootstrap a running Kubernete
 
 ## Prerequisites
 
-**Hardware** — It’s recommended to have at least 4 raspberry pis as a minimum. Through this guide 3 will be used as master nodes, and 1 will be used as a worker node, however, having more is completely fine.
+### Hardware
 
-**Software** — You will need the following CLI tools to be able to follow the steps in this guide:
+It’s recommended to have at least 4 raspberry pis as a minimum. Through this guide 3 will be used as master nodes, and 1 will be used as a worker node, however, having more is completely fine.
 
-- Ansible
-- Flash
-- kubectl
+### Software
 
-Finally, you will need to clone this repository: https://github.com/raspbernetes/k8s-cluster-installation
+You will need the following CLI tools to be able to follow the steps in this guide:
+
+#### Ansible
+
+Ansible can be installed using the following commands:
+
+```bash
+sudo apt-get install software-properties-common
+sudo apt-add-repository ppa:ansible/ansible
+sudo apt-get update
+sudo apt-get install ansible
+```
+
+#### Flash
+
+Install flash via Hypriot's download:
+
+```bash
+sudo curl -L "https://github.com/hypriot/flash/releases/download/2.5.0/flash" -o /usr/local/bin/flash
+sudo chmod +x /usr/local/bin/flash
+```
+
+#### kubectl
+
+kubectl can be installed via kubernetes own [instructions](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/).
+
+### Finally, clone [Raspbernetes](https://github.com/raspbernetes/k8s-cluster-installation)
+
+Clone the repo into your local machine and then follow the instructions to flash your control planes and nodes.
 
 ## Flash SD Cards
 
@@ -71,7 +97,7 @@ k8s-worker-01 hostname=k8s-worker-01 ansible_host=192.168.1.131 ansible_user=pi
 
 When the inventory has been configured with all hosts, there is one last thing we must configure. We need to assign a VIP (“Virtual IP”) that will be used to load-balance across the HA master nodes.
 
-Open masters.yml and configure the keepalived_vip value to an unassigned IP. For my configuration I use 192.168.1.200 .
+Open ```ansible/group_vars/all.yml``` and configure the keepalived_vip value to an unassigned IP. For my configuration I use 192.168.1.200 .
 Run the following command to verify SSH connectivity.
 
 ```bash
