@@ -97,7 +97,7 @@ k8s-worker-01 hostname=k8s-worker-01 ansible_host=192.168.1.131 ansible_user=pi
 
 When the inventory has been configured with all hosts, there is one last thing we must configure. We need to assign a VIP (“Virtual IP”) that will be used to load-balance across the HA master nodes.
 
-Open masters.yml and configure the keepalived_vip value to an unassigned IP. For my configuration I use 192.168.1.200 .
+Open ```ansible/group_vars/all.yml``` and configure the keepalived_vip value to an unassigned IP. For my configuration I use 192.168.1.200 .
 Run the following command to verify SSH connectivity.
 
 ```bash
